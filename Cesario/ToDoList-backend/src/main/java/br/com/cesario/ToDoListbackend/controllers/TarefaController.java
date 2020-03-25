@@ -3,6 +3,8 @@ package br.com.cesario.ToDoListbackend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import br.com.cesario.ToDoListbackend.repository.TarefaRepository;
 
 @RestController
 @RequestMapping(value = "/todolist")
+@CrossOrigin(value = "*")
 public class TarefaController {
 
 	@Autowired
@@ -23,7 +26,7 @@ public class TarefaController {
 
 	@GetMapping(value = "/listar/tarefas")
 	public List<Tarefa> listarTarefas() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping(value = "/salvar/tarefa")
