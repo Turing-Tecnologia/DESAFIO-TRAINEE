@@ -28,7 +28,7 @@ Não será contado como critério de aprovação o visual da interface com o usu
 mas o candidato que tiver bom desempenho no quesito em questão, terá este como
 uma característica diferencial.
 
-##IMPORTANTE 
+# IMPORTANTE 
 
   - Faça um Fork neste repositório 
   - Adicione uma pasta com seu nome
