@@ -13,10 +13,6 @@ melhor será. Para os que irão disputar a vaga de Design, o desafio se dará po
 desenvolver um protótipo de média-alta fidelidade de uma aplicação também baseada
 em ToDoList a critério do candidato.
 
-Markdown
-Toggle Zen Mode
-Preview
-Toggle Mode
 
 Tomando como base o tempo disponível para que os candidatos desenvolvam
 a aplicação, os seguintes critérios serão levados em conta durante a avaliação:
