@@ -22,7 +22,7 @@ a aplicação.
 como Java Aplication (utilizando o eclipse)
 ps: certifique-se que o tomcat iniciou na porta padrao: 8080
 
-<h3>Continue o passo 3 apenas se o backend estiver iniciado.
+<h3>Continue o passo 3 apenas se o backend estiver iniciado.</h3>
 
 3. na pasta raiz do frontend \Cesario\todolist abra o terminal e digite os comandos:
 
