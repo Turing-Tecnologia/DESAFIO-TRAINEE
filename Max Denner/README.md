@@ -17,11 +17,11 @@
 </ul>
 <h2>Como abrir o projeto</h2>
 <ol>
-  <li>Importe o banco de dados para o seu servidor do MySQL</li>
+  <li>Importe o banco de dados para o seu servidor do MySQL (o arquivo .sql já contém a instrução para criar o banco)</li>
   <li>Abra o Eclipse, vá em File > Import > Existing Maven Projects</li>
   <li>Selecione o diretório onde está o projeto e clique em Finish</li>
   <li>Configure o servidor do Apache Tomcat no seu Eclipse</li>
   <li>Adicione o projeto no servidor criado</li>
   <li>Inicie o servidor</li>
-  <li>Acesse o projeto a partir da url "localhost:8080/projetoToDo"</li>
+  <li>Acesse o projeto a partir da url "localhost:8080/ListaDeAfazeres"</li>
 </ol>
