@@ -6,6 +6,7 @@
   <li>JSTL</li>
   <li>Java EE </li>
   <li>Spring MVC</li>
+  <li>Stored Procedures</li>
 </ul>
 <h2>Requisitos</h2>
 <p>Para abrir e rodar o projeto serão necessárias as seguintes ferramentas:</p>
