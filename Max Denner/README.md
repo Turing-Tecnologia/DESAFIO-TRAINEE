@@ -26,3 +26,5 @@
   <li>Inicie o servidor</li>
   <li>Acesse o projeto a partir da url "localhost:8080/ListaDeAfazeres"</li>
 </ol>
+
+<p>OBS.: também está disponível um arquivo .war com o projeto, caso queira fazer o deploy diretamente no Tomcat</p>
