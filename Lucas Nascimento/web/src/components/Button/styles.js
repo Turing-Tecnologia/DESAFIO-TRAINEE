@@ -39,6 +39,7 @@ export const Container = styled.button`
   font-weight: bold;
   padding: 0.875rem 1.25rem;
   text-transform: uppercase;
+  min-width: 8rem;
   width: ${(props) => (props.variant ? 'auto' : '100%')};
 
   ${(props) =>

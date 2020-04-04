@@ -8,20 +8,27 @@ import Button, { ButtonGroup } from '../../components/Button';
 export default function HomePage() {
   const history = useHistory();
 
-  const handleSignUpClick = useCallback(() => {
-    history.push('/signup');
-  }, [history]);
+  const handleClick = useCallback(
+    (route) => {
+      history.push(route);
+    },
+    [history]
+  );
 
   return (
     <Container>
       <Logo />
 
       <ButtonGroup>
-        <Button onClick={handleSignUpClick} text="Criar conta" />
-        <Button normal disabled text="Entrar com o Google" />
+        <Button onClick={() => handleClick('/signup')} text="Criar conta" />
+        <Button text="Entrar com o Google" normal disabled />
       </ButtonGroup>
 
-      <Button gradientText text="Login" />
+      <Button
+        onClick={() => handleClick('/signin')}
+        text="Login"
+        gradientText
+      />
     </Container>
   );
 }
