@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import SignUpPage from '../pages/SignUpPage';
 import SignInPage from '../pages/SignInPage';
 import UserPage from '../pages/UserPage';
+import ProfileEditPage from '../pages/ProfileEditPage';
 
 export default function Routes() {
   return (
@@ -14,6 +15,7 @@ export default function Routes() {
       <Route path="/signin" exact component={SignInPage} />
 
       <Route path="/app" exact component={UserPage} />
+      <Route path="/app/profile" exact component={ProfileEditPage} />
     </Switch>
   );
 }
