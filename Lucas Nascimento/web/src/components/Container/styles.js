@@ -10,13 +10,13 @@ export const Content = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   margin: auto;
   max-width: 362px;
   min-height: 100vh;
-  padding: 4rem 2.5rem;
+  padding: 1rem 2.5rem;
 
   & > *:not(:last-child) {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
   }
 `;
