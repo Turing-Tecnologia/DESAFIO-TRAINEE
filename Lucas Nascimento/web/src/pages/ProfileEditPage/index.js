@@ -4,7 +4,7 @@ import Container from '../../components/Container';
 import Button, { ButtonGroup } from '../../components/Button';
 import { AvatarContainer, Avatar, Input } from './styles';
 
-export default function UserPage() {
+export default function ProfileEditPage() {
   return (
     <Container>
       <AvatarContainer>
