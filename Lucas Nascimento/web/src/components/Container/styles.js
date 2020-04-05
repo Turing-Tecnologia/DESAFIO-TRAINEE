@@ -20,6 +20,7 @@ export const Content = styled.div`
   min-height: 100vh;
   padding: 1rem 2.5rem;
   position: relative;
+  width: 100%;
 
   & > *:not(:last-child) {
     margin-bottom: 5rem;
