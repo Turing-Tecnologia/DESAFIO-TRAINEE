@@ -29,3 +29,9 @@ export const getTasksByToken = (token, done = false, number = 0) =>
       'X-AUTH-TOKEN': token,
     },
   });
+
+export const updateTask = (id, userId, task) =>
+  api.patch(`/users/${userId}/tasks/${id}`, { ...task });
+
+export const deleteTask = (id, userId) =>
+  api.delete(`/users/${userId}/tasks/${id}`);

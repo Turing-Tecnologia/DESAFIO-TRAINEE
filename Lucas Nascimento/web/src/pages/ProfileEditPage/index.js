@@ -27,9 +27,10 @@ export default function ProfileEditPage() {
       const newUser = {
         id: user.id,
         name: nameRef.current.value,
-        email: emailRef.current.value,
       };
 
+      if (emailRef.current.value !== user.email)
+        newUser.email = emailRef.current.value;
       if (passwordRef.current) newUser.password = passwordRef.current.value;
 
       updateUser(newUser)

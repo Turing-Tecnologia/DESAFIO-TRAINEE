@@ -8,9 +8,10 @@ import Title from '../../components/Title';
 import Task from './Task';
 
 import { getToken } from '../../services/auth';
-import { getTasksByToken } from '../../services/api';
+import { getTasksByToken, getUserByToken } from '../../services/api';
 
 export default function TaskListPage() {
+  const [userId, setUserId] = useState();
   const [tasks, setTasks] = useState();
   const history = useHistory();
 
@@ -28,12 +29,19 @@ export default function TaskListPage() {
     getTasksByToken(getToken()).then(({ data }) => setTasks(data));
   }, []);
 
+  useEffect(() => {
+    getUserByToken(getToken()).then(({ data }) => setUserId(data.id));
+  }, []);
+
   return (
     <Container>
       <Title>Tarefas</Title>
 
       <ScrollContainer>
-        {tasks && tasks.content.map((item) => <Task key={item.id} {...item} />)}
+        {tasks &&
+          tasks.content.map((item) => (
+            <Task key={item.id} {...item} userId={userId} />
+          ))}
 
         {tasks && !tasks.last && (
           <ShowMore onClick={handleShowMore}>

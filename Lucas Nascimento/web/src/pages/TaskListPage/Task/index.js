@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { Container, Title, Date } from './styles';
+import { Container, Title, Date, Text, Button } from './styles';
 
-export default function Task({ title, datetime }) {
+import { updateTask, deleteTask } from '../../../services/api';
+
+export default function Task({ id, title, datetime, text, userId }) {
+  const [clicked, setClicked] = useState(false);
+  const history = useHistory();
+  const handleClick = useCallback(() => setClicked(!clicked), [clicked]);
+
+  const handleDone = useCallback(() => {
+    updateTask(id, userId, { done: true }).then(() => {
+      history.push('/app/tasks/done');
+    });
+  }, [id, userId, history]);
+
+  const handleDelete = useCallback(() => {
+    deleteTask(id, userId).then(() => {
+      history.push('/app');
+    });
+  }, [id, userId, history]);
+
   const asDate = new window.Date(datetime);
 
   return (
-    <Container>
-      <Title>{title}</Title>
-      {datetime && (
-        <Date>
-          {getMonth(asDate.getMonth())}, {asDate.getDay()}
-        </Date>
+    <Container clicked={clicked}>
+      {clicked ? (
+        <>
+          <Text onClick={handleClick}>{text || 'Sem descrição'}</Text>
+          <Button onClick={handleDone}>Concluir</Button>
+          <Button onClick={handleDelete}>Excluir</Button>
+        </>
+      ) : (
+        <>
+          <Title onClick={handleClick}>{title}</Title>
+          {datetime && (
+            <Date>
+              {getMonth(asDate.getMonth())}, {asDate.getDay()}
+            </Date>
+          )}
+        </>
       )}
     </Container>
   );

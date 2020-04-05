@@ -23,7 +23,7 @@ export default function TaskDoneListPage() {
 
   return (
     <Container>
-      <Title>Tarefas</Title>
+      <Title>Tarefas Concluídas</Title>
 
       <ScrollContainer>
         {tasks && tasks.content.map((item) => <Task key={item.id} {...item} />)}
