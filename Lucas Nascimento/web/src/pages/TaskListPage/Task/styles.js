@@ -13,10 +13,15 @@ export const Title = styled.h3`
   font-weight: normal;
   margin: 0px;
   margin-right: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Date = styled.h4`
   font-size: 0.75rem;
   font-weight: normal;
   margin: 0px;
+  min-width: 42px;
+  text-align: right;
 `;
