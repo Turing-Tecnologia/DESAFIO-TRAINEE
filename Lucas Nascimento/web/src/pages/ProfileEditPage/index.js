@@ -11,18 +11,23 @@ export default function ProfileEditPage() {
   const [displayPass, setDisplayPass] = useState(false);
   const [message, setMessage] = useState();
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
   useEffect(() => {
-    getUserByToken(getToken()).then(({ data }) => setUser(data));
+    getUserByToken(getToken()).then(({ data }) => {
+      setUser(data);
+      setLoading(false);
+    });
   }, []);
 
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
+      setLoading(true);
 
       const newUser = {
         id: user.id,
@@ -40,7 +45,8 @@ export default function ProfileEditPage() {
         })
         .catch(({ response }) =>
           setMessage({ text: response.data.message, success: false })
-        );
+        )
+        .then(() => setLoading(false));
     },
     [user]
   );
@@ -48,7 +54,7 @@ export default function ProfileEditPage() {
   const handleClick = useCallback(() => setDisplayPass(true), []);
 
   return (
-    <Container>
+    <Container loading={loading}>
       {message && <Message success={message.success}>{message.text}</Message>}
       <AvatarContainer>
         <Avatar

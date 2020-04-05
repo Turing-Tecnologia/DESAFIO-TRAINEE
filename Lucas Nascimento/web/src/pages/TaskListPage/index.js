@@ -13,6 +13,7 @@ import { getTasksByToken, getUserByToken } from '../../services/api';
 export default function TaskListPage() {
   const [userId, setUserId] = useState();
   const [tasks, setTasks] = useState();
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   const handleClick = useCallback(() => history.push('/app/tasks/done'), [
@@ -26,15 +27,18 @@ export default function TaskListPage() {
   }, [tasks]);
 
   useEffect(() => {
-    getTasksByToken(getToken()).then(({ data }) => setTasks(data));
-  }, []);
-
-  useEffect(() => {
-    getUserByToken(getToken()).then(({ data }) => setUserId(data.id));
+    async function fetchData() {
+      const { data: tasks } = await getTasksByToken(getToken());
+      const { data: user } = await getUserByToken(getToken());
+      setTasks(tasks);
+      setUserId(user.id);
+      setLoading(false);
+    }
+    fetchData();
   }, []);
 
   return (
-    <Container>
+    <Container loading={loading}>
       <Title>Tarefas</Title>
 
       <ScrollContainer>

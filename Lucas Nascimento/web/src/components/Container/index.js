@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Wrapper, Content, Message } from './styles';
+import { Wrapper, Content, Message, Loading } from './styles';
 
-export default function Container({ children }) {
+export default function Container({ children, loading }) {
   return (
-    <Wrapper>
-      <Content>{children}</Content>
-    </Wrapper>
+    <Wrapper>{loading ? <Loading /> : <Content>{children}</Content>}</Wrapper>
   );
 }
 

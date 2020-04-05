@@ -12,6 +12,7 @@ import { createUser } from '../../services/api';
 export default function SignUpPage() {
   const history = useHistory();
   const [message, setMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -20,24 +21,28 @@ export default function SignUpPage() {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
+      setLoading(true);
+
       const password = passwordRef.current.value;
       const passwordConfirm = confirmPassRef.current.value;
 
       if (password !== passwordConfirm) {
         setMessage('As senhas não coincidem');
+        setLoading(false);
         return;
       } else setMessage(null);
 
       const email = emailRef.current.value;
       createUser({ email, password })
         .then(() => history.push('/signin'))
-        .catch(({ response }) => setMessage(response.data.message));
+        .catch(({ response }) => setMessage(response.data.message))
+        .then(() => setLoading(false));
     },
     [history]
   );
 
   return (
-    <Container>
+    <Container loading={loading}>
       {message && <Message>{message}</Message>}
 
       <Logo />

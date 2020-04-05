@@ -11,15 +11,19 @@ import { getUserByToken } from '../../services/api';
 export default function UserPage() {
   const history = useHistory();
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getUserByToken(getToken()).then(({ data }) => setUser(data));
+    getUserByToken(getToken()).then(({ data }) => {
+      setUser(data);
+      setLoading(false);
+    });
   }, []);
 
   const handleClick = useCallback((route) => history.push(route), [history]);
 
   return (
-    <Container>
+    <Container loading={loading}>
       <Avatar
         src={
           user.avatar_url ||

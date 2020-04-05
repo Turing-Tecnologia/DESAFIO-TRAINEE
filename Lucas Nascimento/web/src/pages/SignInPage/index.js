@@ -13,6 +13,7 @@ import { signInToken } from '../../services/auth';
 export default function SignInPage() {
   const history = useHistory();
   const [message, setMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -20,6 +21,7 @@ export default function SignInPage() {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
+      setLoading(true);
 
       const user = {
         email: emailRef.current.value,
@@ -30,13 +32,14 @@ export default function SignInPage() {
           signInToken(data.token);
           history.push('/app');
         })
-        .catch(({ response }) => setMessage(response.data.message));
+        .catch(({ response }) => setMessage(response.data.message))
+        .then(() => setLoading(false));
     },
     [history]
   );
 
   return (
-    <Container>
+    <Container loading={loading}>
       {message && <Message>{message}</Message>}
       <Logo />
 
