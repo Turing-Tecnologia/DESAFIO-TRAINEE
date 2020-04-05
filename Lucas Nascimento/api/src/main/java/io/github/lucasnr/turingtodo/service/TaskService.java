@@ -24,7 +24,11 @@ public class TaskService {
     }
 
     public Page<Task> findByUserId(Integer userId, Pageable pageable) {
-        return repository.findByUserId(userId, pageable);
+        return repository.findByUserIdAndDoneFalse(userId, pageable);
+    }
+
+    public Page<Task> findByUserIdAndIsDone(Integer userId, Pageable pageable) {
+        return  repository.findByUserIdAndDoneTrue(userId, pageable);
     }
 
     public Optional<Task> findByIdAndUserId(Integer id, Integer userId) {

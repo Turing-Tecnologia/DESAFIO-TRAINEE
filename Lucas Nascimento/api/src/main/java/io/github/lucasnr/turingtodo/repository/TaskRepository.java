@@ -12,4 +12,8 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     public Page<Task> findByUserId(Integer userId, Pageable pageable);
 
     public Optional<Task> findByIdAndUserId(Integer id, Integer userId);
+
+    public Page<Task> findByUserIdAndDoneFalse(Integer userId, Pageable pageable);
+
+    public Page<Task> findByUserIdAndDoneTrue(Integer userId, Pageable pageable);
 }

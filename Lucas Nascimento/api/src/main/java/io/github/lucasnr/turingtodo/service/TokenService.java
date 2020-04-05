@@ -35,6 +35,10 @@ public class TokenService {
         return new TokenDTO(token);
     }
 
+    public Integer getUserId(String token) {
+        return (Integer) getClaims(token).getBody().get("id");
+    }
+
     public boolean isValidToken(String token) {
         try {
             getClaims(token);
@@ -47,4 +51,5 @@ public class TokenService {
     private Jws<Claims> getClaims(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
     }
+
 }
