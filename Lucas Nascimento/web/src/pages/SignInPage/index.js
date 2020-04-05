@@ -1,25 +1,63 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Container from '../../components/Container';
+import Container, { Message } from '../../components/Container';
 import Logo from '../../components/Logo';
 import Button, { ButtonGroup } from '../../components/Button';
 import Input from '../../components/Input';
+import { Form } from './styles';
+
+import { loginUser } from '../../services/api';
+import { signInToken } from '../../services/auth';
 
 export default function SignInPage() {
   const history = useHistory();
-  const handleClick = useCallback(() => history.push('/app'), [history]);
+  const [message, setMessage] = useState();
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const user = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+      loginUser(user)
+        .then(({ data }) => {
+          signInToken(data.token);
+          history.push('/app');
+        })
+        .catch(({ response }) => setMessage(response.data.message));
+    },
+    [history]
+  );
 
   return (
     <Container>
+      {message && <Message>{message}</Message>}
       <Logo />
 
-      <ButtonGroup>
-        <Input name="email" placeholder="E-mail" type="email" />
-        <Input name="password" placeholder="Senha" type="password" />
-      </ButtonGroup>
+      <Form onSubmit={handleSubmit}>
+        <ButtonGroup>
+          <Input
+            ref={emailRef}
+            name="email"
+            placeholder="E-mail"
+            type="email"
+          />
+          <Input
+            ref={passwordRef}
+            name="password"
+            placeholder="Senha"
+            type="password"
+          />
+        </ButtonGroup>
 
-      <Button onClick={handleClick} text="Login" gradientText variant />
+        <Button type="submit" text="Login" gradientText variant />
+      </Form>
     </Container>
   );
 }
