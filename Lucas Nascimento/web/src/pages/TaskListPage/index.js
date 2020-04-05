@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import Container from '../../components/Container';
 import ScrollContainer, { ShowMore } from '../../components/ScrollContainer';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Task from './Task';
+import { useHistory } from 'react-router-dom';
 
 export default function TaskListPage() {
+  const history = useHistory();
+  const handleClick = useCallback(() => history.push('/app/tasks/done'), [
+    history,
+  ]);
+
   return (
     <Container>
       <Title>Tarefas</Title>
@@ -19,7 +25,7 @@ export default function TaskListPage() {
         <ShowMore>Mostrar mais 13 tarefas</ShowMore>
       </ScrollContainer>
 
-      <Button text="Tarefas concluídas" />
+      <Button onClick={handleClick} text="Tarefas concluídas" />
     </Container>
   );
 }
