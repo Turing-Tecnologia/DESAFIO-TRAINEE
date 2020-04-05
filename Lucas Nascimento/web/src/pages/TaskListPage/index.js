@@ -19,7 +19,7 @@ export default function TaskListPage() {
   ]);
 
   const handleShowMore = useCallback(() => {
-    getTasksByToken(getToken(), tasks.number + 1).then(({ data }) =>
+    getTasksByToken(getToken(), false, tasks.number + 1).then(({ data }) =>
       setTasks({ ...data, content: [...tasks.content, ...data.content] })
     );
   }, [tasks]);
