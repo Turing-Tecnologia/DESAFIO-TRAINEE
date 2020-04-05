@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,6 +90,14 @@ public class TaskController {
 
         return ResponseEntity.ok(new TaskDTO(task));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable("userId") Integer userId, @PathVariable("id") Integer id) {
+        Task task = findByIdOrThrowException(id, userId);
+        service.deleteById(task.getId());
+        return ResponseEntity.noContent().build();
+    }
+
 
     private Task findByIdOrThrowException(Integer id, Integer userId) {
         User user = findUserByIdOrThrowException(userId);

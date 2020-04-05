@@ -35,4 +35,7 @@ public class TaskService {
         return repository.findByIdAndUserId(id, userId);
     }
 
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
 }

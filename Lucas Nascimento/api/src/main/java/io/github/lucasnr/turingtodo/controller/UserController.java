@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -69,12 +70,18 @@ public class UserController {
     }
 
     @GetMapping("/me/tasks")
-    public  ResponseEntity<Page<TaskDTO>> findByToken(@RequestHeader("X-AUTH-TOKEN") String token, Pageable pageable) {
+    public  ResponseEntity<Page<TaskDTO>> findByToken(@RequestHeader("X-AUTH-TOKEN") String token,
+                                                      @RequestParam(value = "done", required = false) boolean done,
+                                                      Pageable pageable) {
         if(! tokenService.isValidToken(token))
             throw new InvalidTokenException();
 
         Integer id = tokenService.getUserId(token);
-        Page<Task> page = taskService.findByUserId(id, pageable);
+        Page<Task> page;
+        if(done)
+            page = taskService.findByUserIdAndIsDone(id, pageable);
+        else
+            page = taskService.findByUserId(id, pageable);
         return page.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(page.map(TaskDTO::new));
     }
 
