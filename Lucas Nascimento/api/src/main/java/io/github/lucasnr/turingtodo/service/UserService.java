@@ -34,4 +34,8 @@ public class UserService {
     public boolean existsByEmail(String email) {
         return repository.existsByEmail(email);
     }
+
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password);
+    }
 }
