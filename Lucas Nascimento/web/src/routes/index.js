@@ -8,6 +8,7 @@ import UserPage from '../pages/UserPage';
 import ProfileEditPage from '../pages/ProfileEditPage';
 import TaskListPage from '../pages/TaskListPage';
 import TaskDoneListPage from '../pages/TaskDoneListPage';
+import CreateTaskPage from '../pages/CreateTaskPage';
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/app/profile" exact component={ProfileEditPage} />
       <Route path="/app/tasks" exact component={TaskListPage} />
       <Route path="/app/tasks/done" exact component={TaskDoneListPage} />
+      <Route path="/app/tasks/new" exact component={CreateTaskPage} />
     </Switch>
   );
 }

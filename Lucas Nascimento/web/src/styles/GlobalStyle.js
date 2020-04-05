@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0px;
   }
 
-  body, button, input {
+  body, button, input, textarea {
     font-family: 'Poppins', sans-serif;
     line-height: 1;
   }

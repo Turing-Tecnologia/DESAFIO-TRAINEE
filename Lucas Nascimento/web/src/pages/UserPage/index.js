@@ -20,8 +20,14 @@ export default function UserPage() {
           onClick={() => handleClick('/app/profile')}
           text="Editar perfil"
         />
+
         <Button onClick={() => handleClick('/app/tasks')} text="Tarefas" />
-        <Button text="Criar" gradientText />
+
+        <Button
+          onClick={() => handleClick('/app/tasks/new')}
+          text="Criar"
+          gradientText
+        />
       </ButtonGroup>
     </Container>
   );

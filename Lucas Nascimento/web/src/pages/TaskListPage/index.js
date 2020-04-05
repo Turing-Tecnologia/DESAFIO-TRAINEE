@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import ScrollContainer, { ShowMore } from '../../components/ScrollContainer';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Task from './Task';
-import { useHistory } from 'react-router-dom';
 
 export default function TaskListPage() {
   const history = useHistory();
