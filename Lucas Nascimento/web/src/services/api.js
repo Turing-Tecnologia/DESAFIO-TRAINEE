@@ -11,6 +11,9 @@ export const createUser = (user) => api.post('/users', { ...user });
 
 export const loginUser = (user) => api.post('/auth', { ...user });
 
+export const validateToken = (token) =>
+  api.post('/auth/validate', { token: token });
+
 export const getUserByToken = (token) =>
   api.get('/users/me', {
     headers: {

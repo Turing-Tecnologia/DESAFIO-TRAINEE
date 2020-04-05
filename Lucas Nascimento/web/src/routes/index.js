@@ -1,5 +1,8 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
 import HomePage from '../pages/HomePage';
 import SignUpPage from '../pages/SignUpPage';
@@ -13,15 +16,15 @@ import CreateTaskPage from '../pages/CreateTaskPage';
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact component={HomePage} />
-      <Route path="/signup" exact component={SignUpPage} />
-      <Route path="/signin" exact component={SignInPage} />
+      <PublicRoute path="/" exact component={HomePage} />
+      <PublicRoute path="/signup" exact component={SignUpPage} />
+      <PublicRoute path="/signin" exact component={SignInPage} />
 
-      <Route path="/app" exact component={UserPage} />
-      <Route path="/app/profile" exact component={ProfileEditPage} />
-      <Route path="/app/tasks" exact component={TaskListPage} />
-      <Route path="/app/tasks/done" exact component={TaskDoneListPage} />
-      <Route path="/app/tasks/new" exact component={CreateTaskPage} />
+      <PrivateRoute path="/app" exact component={UserPage} />
+      <PrivateRoute path="/app/profile" exact component={ProfileEditPage} />
+      <PrivateRoute path="/app/tasks" exact component={TaskListPage} />
+      <PrivateRoute path="/app/tasks/done" exact component={TaskDoneListPage} />
+      <PrivateRoute path="/app/tasks/new" exact component={CreateTaskPage} />
     </Switch>
   );
 }
