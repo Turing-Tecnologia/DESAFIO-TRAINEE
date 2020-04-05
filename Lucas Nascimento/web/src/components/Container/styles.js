@@ -25,7 +25,7 @@ export const Content = styled.div`
 export const Message = styled.span`
   background-color: rgba(12, 12, 12, 0.875);
   bottom: 0px;
-  color: #b44;
+  color: ${(props) => (props.success ? '#4b4' : '#b44')};
   font-size: 0.75rem;
   font-size: bold;
   left: 0px;

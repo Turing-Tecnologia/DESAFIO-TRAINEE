@@ -2,6 +2,8 @@ package io.github.lucasnr.turingtodo.controller;
 
 import io.github.lucasnr.turingtodo.dto.TaskDTO;
 import io.github.lucasnr.turingtodo.dto.UserDTO;
+import io.github.lucasnr.turingtodo.dto.UserUpdateDTO;
+import io.github.lucasnr.turingtodo.exception.BadRequestException;
 import io.github.lucasnr.turingtodo.exception.EmailInUseException;
 import io.github.lucasnr.turingtodo.exception.InvalidTokenException;
 import io.github.lucasnr.turingtodo.exception.UserNotFoundByIdException;
@@ -15,7 +17,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,6 +76,32 @@ public class UserController {
         Integer id = tokenService.getUserId(token);
         Page<Task> page = taskService.findByUserId(id, pageable);
         return page.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(page.map(TaskDTO::new));
+    }
+
+    @Transactional
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable("id") Integer id, @RequestBody @Valid UserUpdateDTO userDTO) {
+        Optional<User> optional = service.findById(id);
+        User user = optional.orElseThrow(() -> new UserNotFoundByIdException(id));
+
+        if(!StringUtils.isEmpty(userDTO.getName()))
+            user.setName(userDTO.getName());
+
+        if(!StringUtils.isEmpty(userDTO.getEmail())) {
+            boolean exists = service.existsByEmail(userDTO.getEmail());
+            if(exists)
+                throw new BadRequestException("Este endereço de e-mail já está em uso");
+            else
+                user.setEmail(userDTO.getEmail());
+        }
+
+        if(!StringUtils.isEmpty(userDTO.getPassword()))
+            user.setPassword(userDTO.getPassword());
+
+        if(!StringUtils.isEmpty(userDTO.getAvatarUrl()))
+            user.setAvatarUrl(userDTO.getAvatarUrl());
+
+        return ResponseEntity.ok(new UserDTO(user));
     }
 
     @Transactional

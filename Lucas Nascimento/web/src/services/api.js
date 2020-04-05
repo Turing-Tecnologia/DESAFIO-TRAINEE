@@ -17,3 +17,5 @@ export const getUserByToken = (token) =>
       'X-AUTH-TOKEN': token,
     },
   });
+
+export const updateUser = (user) => api.patch(`/users/${user.id}`, { ...user });

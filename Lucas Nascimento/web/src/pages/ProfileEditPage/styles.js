@@ -36,3 +36,13 @@ export const AvatarContainer = styled.section`
 export const Input = styled(DefaultInput)`
   text-align: center;
 `;
+
+export const Form = styled.form`
+  width: 100%;
+
+  & > button:last-child {
+    display: block;
+    margin: auto;
+    margin-top: 4rem;
+  }
+`;
