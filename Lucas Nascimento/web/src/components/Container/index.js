@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Wrapper, Content } from './styles';
+import { Wrapper, Content, Message } from './styles';
 
 export default function Container({ children }) {
   return (
@@ -9,3 +9,5 @@ export default function Container({ children }) {
     </Wrapper>
   );
 }
+
+export { Message };

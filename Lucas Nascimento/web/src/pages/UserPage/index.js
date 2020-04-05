@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import Button, { ButtonGroup } from '../../components/Button';
-import Input from '../../components/Input';
 import { Avatar } from './styles';
 
 export default function UserPage() {
